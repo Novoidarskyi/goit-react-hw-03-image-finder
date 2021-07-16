@@ -1,3 +1,4 @@
+import ImageGalleryItem from 'components/ImageGalleryItem';
 import css from './ImageGallery.module.css';
 
 const ImageGallery = ({ images, pictureName }) => {
@@ -5,12 +6,16 @@ const ImageGallery = ({ images, pictureName }) => {
   return (
     <ul className={css.ImageGallery}>
       {images.map(({ id, webformatURL }) => (
-        <li key={id}>
-          <img src={webformatURL} alt={ pictureName} />
-        </li>
-      ))}
+        <ImageGalleryItem id={id} url = {webformatURL} pictureName ={pictureName} /> 
+             ))}
     </ul>
   );
 };
 
 export default ImageGallery;
+
+//  {images.map(({ id, webformatURL }) => (
+//         <li key={id}>
+//           <img src={webformatURL} alt={ pictureName} />
+//         </li>
+//       ))}

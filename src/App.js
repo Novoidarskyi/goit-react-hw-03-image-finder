@@ -9,7 +9,7 @@ const KEY_API = '21851432-4720cbd8c8a1bfa0aa0ff2c82&';
 export default class App extends Component {
   state = {
     images: [],
-    pictureName: '',
+    pictureName: 'dog',
     page: 1,
   };
 
