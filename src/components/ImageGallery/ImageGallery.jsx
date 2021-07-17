@@ -14,8 +14,3 @@ const ImageGallery = ({ images, pictureName }) => {
 
 export default ImageGallery;
 
-//  {images.map(({ id, webformatURL }) => (
-//         <li key={id}>
-//           <img src={webformatURL} alt={ pictureName} />
-//         </li>
-//       ))}

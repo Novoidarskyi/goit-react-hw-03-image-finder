@@ -1,5 +1,6 @@
-import css from './Searchbar.module.css';
 import { Component } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import css from './Searchbar.module.css';
 
 
 export default class Searchbar extends Component {
@@ -14,12 +15,18 @@ handleNameChange= e => {
 
 handleSubmit = e => {
   e.preventDefault();
-  this.props.onSubmit(this.state.inputValue);
+  if(this.state.inputValue.trim() === '')
+  {
+    toast.error('Введите запрос для поиска изображений!');
+    return
+  }
+    this.props.onSubmit(this.state.inputValue);
   this.setState({inputValue: ''});
 }
 
   render() {
     return (
+      <>
     <header className={css.searchbar}>
       <form className={css.searchForm} onSubmit={this.handleSubmit}>
         <button type="submit" className={css.searchFormButton}>
@@ -36,6 +43,10 @@ handleSubmit = e => {
           onChange={this.handleNameChange}
         />
       </form>
-    </header>)
+    </header>
+    <Toaster position="top-center" toastOptions={{ duration: 1500, style: {border: '1px solid royalblue', width: '500px'}}} />
+    </>
+    )
+    
   }
 }
