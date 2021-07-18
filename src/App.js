@@ -18,12 +18,12 @@ export default class App extends Component {
     error: null,
   };
 
-  // componentDidMount() {
-  //   const url = `${BASE_URL}/?q=${this.state.pictureName}&page=${this.state.page}&key=${KEY_API}&image_type=photo&orientation=horizontal&per_page=12`;
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then(images => this.setState({ images: images.hits }));
-  // }
+  componentDidMount() {
+    const url = `${BASE_URL}/?q=${this.state.pictureName}&page=${this.state.page}&key=${KEY_API}&image_type=photo&orientation=horizontal&per_page=12`;
+    fetch(url)
+      .then(res => res.json())
+      .then(images => this.setState({ images: images.hits }));
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.pictureName !== this.state.pictureName) {
