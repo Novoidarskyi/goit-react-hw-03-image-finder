@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import PropTypes from "prop-types";
 import css from './Searchbar.module.css';
 
 
@@ -9,9 +10,13 @@ export default class Searchbar extends Component {
   };
 
 
+  // Метод для передачи значения input в state
+  
 handleNameChange= e => {
   this.setState({inputValue: e.target.value.toLowerCase()})
 }
+
+  // Метод для передачи state из  Searchbar в App
 
 handleSubmit = e => {
   e.preventDefault();
@@ -49,4 +54,8 @@ handleSubmit = e => {
     )
     
   }
+}
+
+Searchbar.propTypes = {
+onSubmit: PropTypes.func.isRequired,  
 }

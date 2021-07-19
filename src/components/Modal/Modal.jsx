@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from './Modal.module.css'
 
 
@@ -11,5 +12,13 @@ const Modal = ({ largeImageURL, pictureName, onClickModal, onChange }) => {
 </div>
   )
 }
+
+Modal.propTypes = {
+  largeImageURL: PropTypes.string.isRequired,
+  pictureName: PropTypes.string.isRequired,
+  onClickModal: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
+
 
 export default Modal
