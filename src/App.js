@@ -24,9 +24,12 @@ export default class App extends Component {
 
   componentDidMount() {
     const url = `${BASE_URL}/?q=${this.state.pictureName}&page=${this.state.page}&key=${KEY_API}&image_type=photo&orientation=horizontal&per_page=12`;
+    this.setState({ status: 'pending' });
     fetch(url)
       .then(res => res.json())
-      .then(images => this.setState({ images: images.hits }));
+      .then(images =>
+        this.setState({ images: images.hits, status: 'resolved' }),
+      );
   }
 
   // Метод для обновления страницы при запросе от клиента
@@ -49,7 +52,13 @@ export default class App extends Component {
             status: 'resolved',
           })),
         )
-        .catch(error => this.setState({ error, status: 'rejected' }));
+        .catch(error => this.setState({ error, status: 'rejected' }))
+        .finally(() => {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+          });
+        });
     }
   }
 
@@ -67,11 +76,6 @@ export default class App extends Component {
 
   render() {
     const { images, pictureName, error, status } = this.state;
-
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
 
     if (status === 'idle') {
       return (
