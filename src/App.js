@@ -45,19 +45,22 @@ export default class App extends Component {
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
     if (prevState.page !== this.state.page) {
+      this.setState({ status: 'pending' });
       fetchImage(url)
         .then(images =>
           this.setState(prevState => ({
             images: [...prevState.images, ...images.hits],
-            status: 'resolved',
           })),
         )
         .catch(error => this.setState({ error, status: 'rejected' }))
         .finally(() => {
-          window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth',
-          });
+          this.setState({ status: 'resolved' });
+          if (this.state.page > 1) {
+            window.scrollTo({
+              top: document.documentElement.scrollHeight,
+              behavior: 'smooth',
+            });
+          }
         });
     }
   }
